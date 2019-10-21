@@ -1,3 +1,7 @@
+# Mancala Implementation via React and Javascript
+This project is mainly to learn how to use react and to also implement the minimax algorithm. I wanted to combine some AI stuff I have learned with a new skill I wished to learn, while also improving javascript skills.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
