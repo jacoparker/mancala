@@ -17,34 +17,47 @@ ol, ul {
   margin-bottom: 10px;
 }
 
+.board {
+  margin-top: 50%;
+  height: 575px;
+  width: 210px;
+  filter: sepia(75%);
+  background-image: url("images/teak.jpg");
+}
+
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  border-radius: 50%;
   float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
   height: 68px;
+  margin-top: 2px;
+  margin-left: 2.5px;
   margin-right: -1px;
-  margin-top: -1px;
   padding: 0;
   text-align: center;
   width: 102px;
+  color: #fff;
+  background-image: url("images/teak.jpg");
 }
 
 .trough {
-  background: #fff;
   border: 1px solid #999;
   float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
   height: 68px;
+  margin-left: 2.5px;
   margin-right: -1px;
-  margin-top: -1px;
+  margin-top: 5px;
   padding: 0;
   text-align: center;
   width: 201px;
+  border-radius: 25%;
+  color: #fff;
+  background-image: url("images/teak.jpg");
 }
 
 .square:focus {
@@ -61,6 +74,14 @@ ol, ul {
 }
 
 .game-info {
+  margin-top: 100px;
   margin-left: 20px;
+  width: 575px;
+  height: 575px;
 }
 
+.navBar {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)';
+    border: 0;
+    color: 'white';
+}

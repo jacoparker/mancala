@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import NavBar from './toolBar';
 
 
 function Square(props) {
@@ -24,6 +25,10 @@ function Trough(props) {
 }
 
   class Board extends React.Component {
+    renderBoard() {
+      return (<Board/>)
+    }
+
     renderSquare(set, i) {
       if (set) {
         return (
@@ -54,35 +59,38 @@ function Trough(props) {
     render() {
       return (
         <div>
-          <div className="board-row">
-            {this.renderTrough(0)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 0)}
-            {this.renderSquare(1, 5)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 1)}
-            {this.renderSquare(1, 4)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 2)}
-            {this.renderSquare(1, 3)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 3)}
-            {this.renderSquare(1, 2)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 4)}
-            {this.renderSquare(1, 1)}
-          </div>
-          <div className="board-row">
-            {this.renderSquare(0, 5)}
-            {this.renderSquare(1, 0)}
-          </div>
-          <div className="board-row">
-            {this.renderTrough(1)}
+            <div className="board">
+              {this.renderBoard}
+              <div className="board-row">
+              {this.renderTrough(0)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 0)}
+              {this.renderSquare(1, 5)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 1)}
+              {this.renderSquare(1, 4)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 2)}
+              {this.renderSquare(1, 3)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 3)}
+              {this.renderSquare(1, 2)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 4)}
+              {this.renderSquare(1, 1)}
+            </div>
+            <div className="board-row">
+              {this.renderSquare(0, 5)}
+              {this.renderSquare(1, 0)}
+            </div>
+            <div className="board-row">
+              {this.renderTrough(1)}
+            </div>
           </div>
         </div>
       );
@@ -131,18 +139,23 @@ function Trough(props) {
       }
 
       return (
-        <div className="game">
-          <div className="game-board">
-            <Board
-            squares1={current.squares1}
-            squares2={current.squares2}
-            troughs={current.troughs}
-            onClick={(set, i) => this.handleClick(set, i)}
-            />
+        <div>
+          <div style={{align: -1 + 'em'}}>
+            <NavBar/>
           </div>
-          <div className="game-info">
-            <div>{status}</div>
-            <ol>{moves}</ol>
+          <div className="game">
+            <div className="game-board">
+              <Board
+              squares1={current.squares1}
+              squares2={current.squares2}
+              troughs={current.troughs}
+              onClick={(set, i) => this.handleClick(set, i)}
+              />
+            </div>
+            <div className="game-info">
+              <div>{status}</div>
+              <ol>{moves}</ol>
+            </div>
           </div>
         </div>
       );
