@@ -133,7 +133,7 @@ function Trough(props) {
 
       let status;
       if (winner) {
-        status = 'Winnner: ' + winner;
+        status = 'Winner: ' + winner;
       } else {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       }
@@ -213,7 +213,7 @@ function Trough(props) {
         }
         // switch players??
         let xIsNext = this.state.xIsNext;
-        if (i == 0) xIsNext = !xIsNext;
+        if (i === 0) xIsNext = !xIsNext;  // TODO fix when pebbles stop in other trough and player still goes again
         this.setState({
             history: history.concat([{
                 squares1: squares1,
@@ -233,12 +233,29 @@ function Trough(props) {
     document.getElementById('root')
   );
 
+  function detectPlayerDone(squares) {
+    for (let i=0; i<squares.length; i++)
+      if (squares[i] !== 0)
+        return false;
+    return true;
+  }
+
   function calculateWinner(squares1, squares2, troughs) {
-    for (let i=0; i<6; i++) {
-      if (squares1[i] != 0 || squares2[i] != 0) {
-        return null;
+    if (troughs[0] + troughs[1] == 48)
+      return (troughs[0] > troughs[1]) ? 'O' : 'X';
+    if (detectPlayerDone(squares1)) {
+      for (let i=0; i<squares2.length; i++) {
+        troughs[0] += squares2[i];
+        squares2[i] = 0;
       }
+      return (troughs[0] > troughs[1]) ? 'O' : 'X';
     }
-    // no tie detection right now but I'm lazy
-    return (troughs[0] > troughs[1]) ? troughs[0] : troughs[1];
+    if (detectPlayerDone(squares2)) {
+      for (let i=0; i<squares1.length; i++) {
+        troughs[0] += squares1[i];
+        squares1[i] = 0;
+      }
+      return (troughs[0] > troughs[1]) ? 'O' : 'X';
+    }
+    return null;
   }
