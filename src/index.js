@@ -192,15 +192,18 @@ function Trough(props) {
           squares2[i++] = 0;
         }
 
+        let lastTrough = 0;
         while (numPebbles > 0) {
           if (i > 5) {
             i = 0;  // reset counter
             if (inSquareSet1) {
               troughs[0] += 1;
               inSquareSet1 = !inSquareSet1;
+              lastTrough = 0;
             } else {
               troughs[1] += 1;
               inSquareSet1 = !inSquareSet1;
+              lastTrough = 1;
             }
           } else {
             if (inSquareSet1) {
@@ -213,7 +216,8 @@ function Trough(props) {
         }
         // switch players??
         let xIsNext = this.state.xIsNext;
-        if (i === 0) xIsNext = !xIsNext;  // TODO fix when pebbles stop in other trough and player still goes again
+        if (i === 0 && lastTrough === 1 && xIsNext) xIsNext = !xIsNext;
+        else if (i === 0 && lastTrough === 0 && !xIsNext) xIsNext = !xIsNext;
         this.setState({
             history: history.concat([{
                 squares1: squares1,
