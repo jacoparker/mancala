@@ -21,13 +21,16 @@ ol, ul {
   margin-top: 50%;
   height: 575px;
   width: 210px;
-  filter: sepia(75%);
-  background-image: url("images/teak.jpg");
+  border-style: solid;
+  border-color: rgb(117, 117, 117);
+  border-width: thin;
 }
 
 .square {
+  border: thin solid rgb(117, 117, 117);
   border-radius: 50%;
   float: left;
+  background-color: #fff;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
@@ -38,16 +41,15 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 102px;
-  color: #fff;
-  background-image: url("images/teak.jpg");
+  color: rgb(117, 117, 117);
 }
 
 .trough {
-  border: 1px solid #999;
+  border: thin solid rgb(117, 117, 117);
   float: left;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
-  line-height: 34px;
+  line-height: 64px;
   height: 68px;
   margin-left: 2.5px;
   margin-right: -1px;
@@ -56,8 +58,7 @@ ol, ul {
   text-align: center;
   width: 201px;
   border-radius: 25%;
-  color: #fff;
-  background-image: url("images/teak.jpg");
+  color: rgb(117, 117, 117);
 }
 
 .square:focus {

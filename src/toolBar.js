@@ -28,9 +28,8 @@ export default function NavBar() {
             <IconButton edge="start" className={classes.menuButton} aria-label="menu">
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Mancala!
+              Mancala
             </Typography>
-            <Button color="inherit">Animation</Button>
             <Button color="inherit">Difficulty</Button>
             <Button color="inherit">History</Button>
             <Button color="inherit">Restart</Button>
