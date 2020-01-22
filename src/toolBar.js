@@ -31,7 +31,6 @@ export default function NavBar() {
               Mancala
             </Typography>
             <Button color="inherit">Difficulty</Button>
-            <Button color="inherit">History</Button>
             <Button color="inherit">Restart</Button>
           </Toolbar>
         </AppBar>
