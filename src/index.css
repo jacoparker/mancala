@@ -42,6 +42,13 @@ ol, ul {
   text-align: center;
   width: 102px;
   color: rgb(117, 117, 117);
+  transition-property: background;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in;
+}
+
+.square:hover {
+  background: rgb(84, 233, 79);
 }
 
 .trough {
