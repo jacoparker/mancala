@@ -197,11 +197,17 @@ function Trough(props) {
           if (i > 5) {
             i = 0;  // reset counter
             if (inSquareSet1) {
-              troughs[0] += 1;
+              if (!this.state.xIsNext) {
+                troughs[0] += 1;
+                numPebbles -= 1;
+              }
               inSquareSet1 = !inSquareSet1;
               lastTrough = 0;
             } else {
-              troughs[1] += 1;
+              if (this.state.xIsNext) {
+                troughs[1] += 1;
+                numPebbles -= 1;
+              }
               inSquareSet1 = !inSquareSet1;
               lastTrough = 1;
             }
@@ -211,8 +217,8 @@ function Trough(props) {
             } else {
               squares2[i++] += 1;
             }
+            numPebbles -= 1;
           }
-          numPebbles -= 1;
         }
         // switch players??
         let xIsNext = this.state.xIsNext;
