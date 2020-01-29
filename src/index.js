@@ -4,6 +4,8 @@ import './index.css';
 import NavBar from './toolBar';
 
 
+let difficulty = 5;
+
 function Square(props) {
     return (
         <button
@@ -45,7 +47,6 @@ function Trough(props) {
           />
         );
       }
-
     }
 
     renderTrough(i) {
@@ -120,6 +121,13 @@ function Trough(props) {
         current.troughs
       );
 
+      if (!current.xIsNext) {
+        let i = bestMove(current.squares1, current.squares2);
+        setTimeout(() => {
+          this.handleClick(1, i);
+        }, 5000);
+      }
+
       const moves = history.map((step, move) => {
         const desc = move ?
           'Go to move #' + move :
@@ -137,7 +145,7 @@ function Trough(props) {
       } else {
         status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       }
-
+      
       return (
         <div>
           <div style={{align: -1 + 'em'}}>
@@ -289,3 +297,108 @@ function Trough(props) {
     }
     return null;
   }
+
+function bestMove(squares1, squares2) {
+    return miniMax(squares1, squares2, false, 0, 0, -1)[1];
+}
+
+function miniMax(squares1, squares2, playerTurn, depth, score) {
+    if (depth == difficulty)  // base case
+      return [score, 0];
+
+    let winner = calculateWinner(squares1, squares2, [0,0]);
+    if (winner === 'X' && playerTurn) {
+      return [-Infinity, pit];
+    } else if (winner === 'O' && !playerTurn) {
+      return [Infinity, pit];
+    } else if (winner === 'X' && !playerTurn) {
+      return [-Infinity, pit];
+    } else if (winner === 'O' && playerTurn) {
+      return [Infinity, pit];
+    }
+
+    let bestScore, move = 0;
+    if (playerTurn) {
+      bestScore = Infinity;
+      for (let i=0; i<6; i++) {
+        let tmpScore = score;
+        let tSquares1 = squares1.slice(), tSquares2 = squares2.slice();
+        // test using each pit
+        if (squares1[i] == 0)
+          continue;
+        let j = i;
+        while (tSquares1[i] > 1) {
+          j = (j+1)%13;
+          if (j<6) {
+            tSquares1[j]++;
+          } else if (j===6) {
+            tmpScore--;
+          } else {
+            tSquares2[j-7]++;
+          }
+          tSquares1[i]--;
+        }
+        j = (j+1)%13;
+        let result;
+        if (j < 6) {
+          if (tSquares1[j] === 0) {
+            tmpScore -= tSquares2[5-j] + 1;
+            tSquares2[5-j] = 0;
+          } else {
+            tSquares1[j]++;
+          }
+          result = miniMax(tSquares1, tSquares2, !playerTurn, depth+1, tmpScore);
+        } else if (j === 6) {
+          result = miniMax(tSquares1, tSquares2, playerTurn, depth+1, tmpScore-1);
+        } else {
+          tSquares2[j-7] += 1;
+          result = miniMax(tSquares1, tSquares2, !playerTurn, depth+1, tmpScore);
+        }
+        if (result[0] < bestScore) {
+          bestScore = result[0];
+          move = result[1];
+        }
+      }
+    } else {
+      bestScore = -Infinity;
+      for (let i=0; i<6; i++) {
+        let tmpScore = score;
+        let tSquares1 = squares1.slice(), tSquares2 = squares2.slice();
+        if (squares2[i] == 0)
+          continue;
+        let j = i;
+        while (tSquares2[i] > 1) {
+          j = (j+1)%13;
+          if (j<6) {
+            tSquares2[j]++;
+          } else if (j===6) {
+            tmpScore++;
+          } else {
+            tSquares1[j-7]++;
+          }
+          tSquares2[i]--;
+        }
+        j = (j+1)%13;
+        let result;
+        if (j < 6) {
+          if (tSquares2[j] === 0) {
+            tmpScore += tSquares1[5-j] + 1;
+            tSquares1[5-j] = 0;
+          } else {
+            tSquares2[j]++;
+          }
+          result = miniMax(tSquares1, tSquares2, !playerTurn, depth+1, tmpScore);
+        } else if (j === 6) {
+          result = miniMax(tSquares1, tSquares2, playerTurn, depth+1, tmpScore+1);
+        } else {
+          tSquares1[j-7] += 1;
+          result = miniMax(tSquares1, tSquares2, !playerTurn, depth+1, tmpScore);
+        }
+        if (result[0] > bestScore) {
+          bestScore = result[0];
+          move = result[1];
+        }
+      }
+    }
+    return [bestScore, move];
+}
