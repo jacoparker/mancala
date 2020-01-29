@@ -4,7 +4,7 @@ import './index.css';
 import NavBar from './toolBar';
 
 
-let difficulty = 5;
+let difficulty = 1;
 
 function Square(props) {
     return (
@@ -308,13 +308,13 @@ function miniMax(squares1, squares2, playerTurn, depth, score) {
 
     let winner = calculateWinner(squares1, squares2, [0,0]);
     if (winner === 'X' && playerTurn) {
-      return [-Infinity, pit];
+      return [-Infinity, 0];
     } else if (winner === 'O' && !playerTurn) {
-      return [Infinity, pit];
+      return [Infinity, 0];
     } else if (winner === 'X' && !playerTurn) {
-      return [-Infinity, pit];
+      return [-Infinity, 0];
     } else if (winner === 'O' && playerTurn) {
-      return [Infinity, pit];
+      return [Infinity, 0];
     }
 
     let bestScore, move = 0;
@@ -356,7 +356,7 @@ function miniMax(squares1, squares2, playerTurn, depth, score) {
         }
         if (result[0] < bestScore) {
           bestScore = result[0];
-          move = result[1];
+          move = i;
         }
       }
     } else {
@@ -396,7 +396,7 @@ function miniMax(squares1, squares2, playerTurn, depth, score) {
         }
         if (result[0] > bestScore) {
           bestScore = result[0];
-          move = result[1];
+          move = i;
         }
       }
     }
